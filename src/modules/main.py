@@ -2,12 +2,10 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from utils.config import get_settings
 
-# Import routers here
-# Example: from routes.your_module import router as your_router
 
 settings = get_settings()
 
-# Initialize FastAPI app
+
 app = FastAPI(
     title=settings.app_name,
     version=settings.app_version,
@@ -16,7 +14,7 @@ app = FastAPI(
     redoc_url="/redoc" if settings.env == "development" else None,
 )
 
-# Configure CORS
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.cors_origins,
@@ -48,9 +46,6 @@ async def health_check():
         "environment": settings.env
     }
 
-
-# Include routers here
-# Example: app.include_router(your_router, prefix=settings.api_prefix)
 
 
 if __name__ == "__main__":
